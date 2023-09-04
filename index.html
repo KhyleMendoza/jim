@@ -10,26 +10,37 @@
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-  <div id="content_container">
-    <div id="form_container">
-      <div id="form_header_container">
-        <h2 id="form_header">Jim's Footwear Haven</h2>
-      </div>
-
-      <div id="form_content_container">
-        <div id="form_content_inner_container">
-          <input type="text" id="full_name" placeholder="Full name">
-          <input type="email" id="email" placeholder="Email">
-          <input type="password" id="password" placeholder="Password">
-          <div id="button_container">
-            <button id="loginButton" onclick="login()">Login</button>
-            <button id="registerButton" onclick="register()">Register</button>
+  
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <div id="content_container">
+        <div id="form_container">
+          <div id="form_header_container">
+            <h2 id="form_header">Jim's Footwear Haven</h2>
+            <span class="close" id="closeModalBtn" onclick="closeModal()">&times;</span>
           </div>
-          <span id="toggleMessage" onclick="toggleRegistration()">Not yet signed up? Register now</span>
+    
+          <div id="form_content_container">
+            <div id="form_content_inner_container">
+              <input type="text" id="full_name" placeholder="Full name">
+              <input type="email" id="email" placeholder="Email">
+              <input type="password" id="password" placeholder="Password">
+              <div id="button_container">
+                <button id="loginButton" onclick="login()">Login</button>
+                <button id="registerButton" onclick="register()">Register</button>
+              </div>
+              <span id="toggleMessage" onclick="toggleRegistration()">Not yet signed up? Register now</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  
+  <button id="openModalBtn">buy now</button>
+  <button id="logoutButton" style="margin-left: 10px;">Logout</button>
+
+
   <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
