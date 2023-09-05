@@ -1,16 +1,15 @@
-// Your Firebase configuration
 var firebaseConfig = {
-  apiKey: "AIzaSyBCQT4jYP6WEcSMYNMsF8wgAlOMidaHS4g",
-  authDomain: "login-fef6e.firebaseapp.com",
-  databaseURL: "https://login-fef6e-default-rtdb.firebaseio.com",
-  projectId: "login-fef6e",
-  storageBucket: "login-fef6e.appspot.com",
-  messagingSenderId: "365869099274",
-  appId: "1:365869099274:web:c9c03dbc4b1ceb4f30f2f3",
-  measurementId: "G-9SN9TSYZY8"
-};
-
-firebase.initializeApp(firebaseConfig);
+    apiKey: "AIzaSyBCQT4jYP6WEcSMYNMsF8wgAlOMidaHS4g",
+    authDomain: "login-fef6e.firebaseapp.com",
+    databaseURL: "https://login-fef6e-default-rtdb.firebaseio.com",
+    projectId: "login-fef6e",
+    storageBucket: "login-fef6e.appspot.com",
+    messagingSenderId: "365869099274",
+    appId: "1:365869099274:web:c9c03dbc4b1ceb4f30f2f3",
+    measurementId: "G-9SN9TSYZY8"
+  };
+  
+  firebase.initializeApp(firebaseConfig);
 
 // Initialize variables
 const auth = firebase.auth();
@@ -29,13 +28,6 @@ function toggleRegistration() {
   const loginButton = document.getElementById('loginButton');
   const registerButton = document.getElementById('registerButton');
   const toggleMessage = document.getElementById('toggleMessage');
-  const modal = document.getElementById('myModal');
-  const openModalBtn = document.getElementById('openModalBtn');
-  const closeModalBtn = document.getElementById('closeModalBtn');
-
-  // Attach click event listeners to the buttons
-  openModalBtn.addEventListener('click', redirectToHome);
-  closeModalBtn.addEventListener('click', closeModal);
 
   if (isLoginMode) {
     fullNameField.style.display = 'none';
@@ -48,31 +40,6 @@ function toggleRegistration() {
     registerButton.style.display = 'block';
     toggleMessage.textContent = "Already have an account? Login here";
   }
-}
-
-// Function to open the modal
-function openModal() {
-  const modal = document.getElementById('myModal');
-  modal.style.display = 'block';
-}
-
-// Function to close the modal
-function closeModal() {
-  const modal = document.getElementById('myModal');
-  modal.style.display = 'none';
-}
-
-// Function to redirect to home.html if the user is logged in
-function redirectToHome() {
-  auth.onAuthStateChanged(function (user) {
-    if (user) {
-      // User is logged in, redirect to home.html
-      window.location.href = 'home.html';
-    } else {
-      // User is not logged in, show the modal
-      openModal();
-    }
-  });
 }
 
 // Set up our register function
@@ -106,7 +73,7 @@ function register() {
       database_ref.child('users/' + user.uid).set(user_data)
         .then(function () {
           console.log("User registered and data saved to the database.");
-          closeModal(); // Close the modal on successful registration
+          window.location.href = 'home.html';
         })
         .catch(function (error) {
           console.error("Error saving user data to the database:", error);
@@ -141,7 +108,7 @@ function login() {
       database_ref.child('users/' + user.uid).update(user_data)
         .then(function () {
           console.log("User logged in and last login time updated in the database.");
-          closeModal(); // Close the modal on successful login
+          window.location.href = 'home.html';
         })
         .catch(function (error) {
           console.error("Error updating last login time in the database:", error);
@@ -167,22 +134,6 @@ function validate_password(password) {
 function validate_field(field) {
   return field != null && field.length > 0;
 }
-
-// Get the logout button element
-const logoutButton = document.getElementById('logoutButton');
-
-// Add a click event listener to the logout button
-logoutButton.addEventListener('click', function () {
-  auth.signOut()
-    .then(function () {
-      console.log("User logged out.");
-      // You can optionally redirect the user to a login page or perform other actions after logout.
-    })
-    .catch(function (error) {
-      console.error("Error logging out:", error);
-      alert("Error occurred while logging out.");
-    });
-});
 
 // Initialize the page with the login mode (full name hidden)
 toggleRegistration();
